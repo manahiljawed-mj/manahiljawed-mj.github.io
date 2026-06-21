@@ -386,22 +386,46 @@
         <div class="chips"><span class="chip hot">Spring Boot</span><span class="chip hot">Quarkus</span><span class="chip hot">Kafka</span><span class="chip">RabbitMQ</span><span class="chip">Docker</span><span class="chip">Kubernetes</span><span class="chip">XState</span><span class="chip">IBM DB2</span><span class="chip">Keycloak</span></div>
       </div>
       <div class="card reveal"><span class="card-glow"></span>
-        <div class="card-id"><span>PROJ_02</span><span class="k">// research · FYP</span></div>
-        <h3>Muhaffiz: Emergency Medical Dispatch & Optimization</h3>
+        <div class="card-id"><span>PROJ_02</span><span class="k">// event-driven</span></div>
+        <h3>Event-Driven E-Commerce Platform</h3>
+        <p>Microservices platform (Product, Order, Payment, Inventory, Notification) communicating asynchronously over Kafka, with distributed-transaction handling, Keycloak-secured services, and Kubernetes deployment.</p>
+        <div class="chips"><span class="chip hot">Spring Boot</span><span class="chip hot">Kafka</span><span class="chip">PostgreSQL</span><span class="chip">Docker</span><span class="chip">Kubernetes</span><span class="chip">Keycloak</span></div>
+      </div>
+      <div class="card reveal"><span class="card-glow"></span>
+        <div class="card-id"><span>PROJ_03</span><span class="k">// fintech · workflow</span></div>
+        <h3>Maker / Checker Authorization Engine</h3>
+        <p>Banking-style authorization workflow modeling Maker, Checker and Approver roles as explicit FSM states, enforcing deterministic transitions, approval/rejection paths, and a full audit trail over a JWT-secured API.</p>
+        <div class="chips"><span class="chip hot">Spring Boot</span><span class="chip hot">XState</span><span class="chip">PostgreSQL</span><span class="chip">JWT</span><span class="chip">State Machines</span></div>
+      </div>
+      <div class="card reveal"><span class="card-glow"></span>
+        <div class="card-id"><span>PROJ_04</span><span class="k">// platform · infra</span></div>
+        <h3>API Gateway &amp; Microservices Platform</h3>
+        <p>Service-mesh-style platform with Spring Cloud Gateway as the single entry point, Eureka service discovery and a centralized Config Server fronting User, Product and Order services.</p>
+        <div class="chips"><span class="chip hot">Spring Cloud Gateway</span><span class="chip">Eureka</span><span class="chip">Config Server</span><span class="chip">Microservices</span></div>
+      </div>
+      <div class="card reveal"><span class="card-glow"></span>
+        <div class="card-id"><span>PROJ_05</span><span class="k">// real-time</span></div>
+        <h3>Real-Time Chat Service</h3>
+        <p>WebSocket-based messaging backend with Redis-backed pub/sub for horizontal scale and reliable message delivery, containerized for multi-instance deployment.</p>
+        <div class="chips"><span class="chip hot">Spring Boot</span><span class="chip hot">WebSockets</span><span class="chip">Redis</span><span class="chip">Docker</span></div>
+      </div>
+      <div class="card reveal"><span class="card-glow"></span>
+        <div class="card-id"><span>PROJ_06</span><span class="k">// devops</span></div>
+        <h3>CI/CD &amp; Kubernetes Delivery Pipeline</h3>
+        <p>End-to-end delivery pipeline building and deploying containerized services to Kubernetes via GitHub Actions, with Prometheus and Grafana for metrics, dashboards and production-readiness monitoring.</p>
+        <div class="chips"><span class="chip hot">GitHub Actions</span><span class="chip">Docker</span><span class="chip">Kubernetes</span><span class="chip">Prometheus</span><span class="chip">Grafana</span></div>
+      </div>
+      <div class="card reveal"><span class="card-glow"></span>
+        <div class="card-id"><span>PROJ_07</span><span class="k">// system design</span></div>
+        <h3>URL Shortener at Scale</h3>
+        <p>High-throughput link-shortening service with collision-safe key generation, a caching layer for read-heavy traffic, click analytics and per-client rate limiting.</p>
+        <div class="chips"><span class="chip hot">Spring Boot</span><span class="chip">PostgreSQL</span><span class="chip">Caching</span><span class="chip">Rate Limiting</span><span class="chip">Analytics</span></div>
+      </div>
+      <div class="card reveal"><span class="card-glow"></span>
+        <div class="card-id"><span>PROJ_08</span><span class="k">// research · optimization</span></div>
+        <h3>Muhaffiz: Emergency Medical Dispatch &amp; Optimization</h3>
         <p>Research-driven dispatch system optimizing ambulance allocation and hospital routing, with a location-aware ranking module and ALS/BLS workflow modeling under real-world constraints.</p>
-        <div class="chips"><span class="chip hot">MERN</span><span class="chip">Geospatial</span><span class="chip">REST</span><span class="chip">Optimization</span><span class="chip">Simulation</span></div>
-      </div>
-      <div class="card reveal"><span class="card-glow"></span>
-        <div class="card-id"><span>PROJ_03</span><span class="k">// deep learning</span></div>
-        <h3>Pneumonia Detection from Chest X-rays</h3>
-        <p>CNN built with TensorFlow and Keras to classify chest X-ray images, with hyperparameter tuning, image preprocessing, and accuracy/loss evaluation across validation sets.</p>
-        <div class="chips"><span class="chip hot">TensorFlow</span><span class="chip">Keras</span><span class="chip">CNN</span><span class="chip">Computer Vision</span></div>
-      </div>
-      <div class="card reveal"><span class="card-glow"></span>
-        <div class="card-id"><span>PROJ_04</span><span class="k">// computer vision</span></div>
-        <h3>Road Lane Detection</h3>
-        <p>Real-time lane-boundary identification with OpenCV, Canny edge detection and Hough Transform, plus region-of-interest masking and coordinate transformation for accuracy.</p>
-        <div class="chips"><span class="chip hot">OpenCV</span><span class="chip">Hough Transform</span><span class="chip">Canny</span><span class="chip">Pipeline</span></div>
+        <div class="chips"><span class="chip hot">Optimization</span><span class="chip">Geospatial</span><span class="chip">REST</span><span class="chip">Simulation</span><span class="chip">Workflow Modeling</span></div>
       </div>
     </div>
   </div>
@@ -412,7 +436,7 @@
     <div class="sec-head reveal"><span class="sec-num">03</span><span class="sec-title">Stack</span><span class="sec-line"></span></div>
     <div class="skill-grid">
       <div class="skill-col reveal"><h4>Backend & Languages</h4><div class="list"><span class="s">Java</span><span class="s">Spring Boot</span><span class="s">Spring</span><span class="s">Hibernate</span><span class="s">JPA / JDBC</span><span class="s">JAX-RS</span><span class="s">Quarkus</span><span class="s">Micronaut</span><span class="s">C# / .NET</span><span class="s">ASP.NET MVC</span><span class="s">Node.js</span><span class="s">Maven</span><span class="s">Gradle</span></div></div>
-      <div class="skill-col reveal"><h4>Microservices & Infra</h4><div class="list"><span class="s">Microservices</span><span class="s">Docker</span><span class="s">Kubernetes</span><span class="s">Kafka</span><span class="s">RabbitMQ</span><span class="s">Event-Driven Arch</span><span class="s">CI/CD · GitLab</span><span class="s">Keycloak</span><span class="s">REST APIs</span></div></div>
+      <div class="skill-col reveal"><h4>Microservices & Infra</h4><div class="list"><span class="s">Microservices</span><span class="s">Docker</span><span class="s">Kubernetes</span><span class="s">Kafka</span><span class="s">RabbitMQ</span><span class="s">Redis</span><span class="s">Event-Driven Arch</span><span class="s">Spring Cloud Gateway</span><span class="s">Eureka</span><span class="s">CI/CD · GitLab</span><span class="s">GitHub Actions</span><span class="s">Prometheus / Grafana</span><span class="s">Keycloak</span><span class="s">JWT</span><span class="s">REST APIs</span></div></div>
       <div class="skill-col reveal"><h4>Frontend & State</h4><div class="list"><span class="s">React.js</span><span class="s">Next.js</span><span class="s">Vue.js</span><span class="s">XState (FSM)</span><span class="s">React Native</span><span class="s">Flutter / Dart</span><span class="s">JavaScript</span><span class="s">JSON</span></div></div>
       <div class="skill-col reveal"><h4>Data & Tooling</h4><div class="list"><span class="s">IBM DB2</span><span class="s">PostgreSQL</span><span class="s">MySQL</span><span class="s">MariaDB</span><span class="s">MongoDB</span><span class="s">Git / GitHub</span><span class="s">Postman</span><span class="s">Agile / Scrum</span><span class="s">OOP</span></div></div>
     </div>
@@ -426,7 +450,7 @@
       <div class="panel reveal">
         <h3>BS, Computer Science</h3>
         <div class="deg">National University of Computer & Emerging Sciences (FAST)</div>
-        <div class="uni">Karachi, Pakistan · 2019 – 2023</div>
+        <div class="uni">Karachi, Pakistan · 2019 to 2023</div>
         <div class="gpa-row">
           <div class="stat"><div class="v">3.22</div><div class="k">CGPA / 4.00</div></div>
           <div class="stat"><div class="v">×2</div><div class="k">Dean's List</div></div>
