@@ -46,17 +46,40 @@
 
   /* ---------- NAV ---------- */
   nav{position:fixed;top:0;left:0;right:0;z-index:100;transition:background .3s,border-color .3s}
-  nav.scrolled{background:rgba(6,8,15,0.8);backdrop-filter:blur(14px);border-bottom:1px solid var(--line-soft)}
+  nav.scrolled{background:rgba(6,8,15,0.72);backdrop-filter:blur(16px) saturate(1.4);border-bottom:1px solid var(--line-soft);box-shadow:0 1px 0 rgba(108,140,255,0.06),0 8px 30px rgba(0,0,0,0.35)}
   nav .bar{max-width:var(--maxw);margin:0 auto;padding:0 28px;height:66px;display:flex;align-items:center;justify-content:space-between}
-  .brand{font-family:var(--mono);font-size:14px;display:flex;align-items:center;gap:10px;letter-spacing:.5px}
+  .brand{font-family:var(--mono);font-size:14px;display:flex;align-items:center;gap:10px;letter-spacing:.5px;font-weight:500}
   .brand .blip{width:9px;height:9px;border-radius:50%;background:var(--good);box-shadow:0 0 12px var(--good);animation:pulse 2.2s infinite}
   @keyframes pulse{50%{opacity:.4}}
-  .navlinks{display:flex;gap:28px;font-family:var(--mono);font-size:13px;color:var(--text-faint)}
-  .navlinks a{transition:color .2s;position:relative;padding:4px 0}
-  .navlinks a::after{content:"";position:absolute;left:0;bottom:0;width:0;height:1.5px;background:var(--accent);transition:width .25s}
+
+  .navlinks{display:flex;align-items:center;gap:4px;font-family:var(--mono);font-size:13px;padding:5px;border-radius:14px;background:rgba(255,255,255,0.018);border:1px solid transparent;transition:border-color .3s,background .3s}
+  nav.scrolled .navlinks{border-color:var(--line-soft);background:rgba(14,19,34,0.5)}
+  .navlinks a{position:relative;padding:7px 14px;border-radius:9px;color:var(--text-faint);letter-spacing:.3px;transition:color .25s,background .25s}
+  .navlinks a::before{content:"";position:absolute;inset:0;border-radius:9px;background:linear-gradient(120deg,rgba(108,140,255,0.14),rgba(160,107,255,0.12));opacity:0;transition:opacity .25s;z-index:-1}
+  .navlinks a::after{content:"";position:absolute;left:14px;right:14px;bottom:4px;height:2px;border-radius:2px;background:linear-gradient(90deg,var(--accent),var(--accent-2),var(--cyan));transform:scaleX(0);transform-origin:left;transition:transform .3s cubic-bezier(.2,.7,.2,1)}
   .navlinks a:hover{color:var(--text)}
-  .navlinks a:hover::after{width:100%}
-  @media(max-width:680px){.navlinks{display:none}}
+  .navlinks a:hover::before{opacity:1}
+  .navlinks a:hover::after{transform:scaleX(1)}
+  /* active section (scroll-spy) */
+  .navlinks a.active{color:var(--text)}
+  .navlinks a.active::before{opacity:1;background:linear-gradient(120deg,rgba(108,140,255,0.2),rgba(160,107,255,0.16))}
+  .navlinks a.active::after{transform:scaleX(1);box-shadow:0 0 10px var(--accent-glow)}
+
+  /* mobile menu toggle */
+  .nav-toggle{display:none;flex-direction:column;gap:5px;width:42px;height:38px;align-items:center;justify-content:center;border:1px solid var(--line-soft);border-radius:10px;background:rgba(14,19,34,0.5);cursor:pointer;transition:border-color .25s}
+  .nav-toggle:hover{border-color:var(--accent)}
+  .nav-toggle span{display:block;width:18px;height:2px;border-radius:2px;background:var(--text-dim);transition:transform .3s,opacity .3s}
+  .nav-toggle.open span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+  .nav-toggle.open span:nth-child(2){opacity:0}
+  .nav-toggle.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+
+  @media(max-width:680px){
+    .nav-toggle{display:flex}
+    .navlinks{position:fixed;top:66px;right:14px;left:14px;flex-direction:column;align-items:stretch;gap:4px;padding:10px;background:rgba(8,11,20,0.92);backdrop-filter:blur(18px) saturate(1.4);border:1px solid var(--line-soft);border-radius:16px;box-shadow:0 20px 50px rgba(0,0,0,0.5);opacity:0;transform:translateY(-10px) scale(.98);pointer-events:none;transition:opacity .25s,transform .25s}
+    .navlinks.show{opacity:1;transform:none;pointer-events:auto}
+    .navlinks a{padding:13px 16px;font-size:14px}
+    .navlinks a::after{bottom:8px}
+  }
 
   /* ---------- HERO ---------- */
   header{min-height:100svh;position:relative;display:flex;align-items:center;overflow:visible}
@@ -266,22 +289,25 @@
 <nav id="nav">
   <div class="bar">
     <div class="brand"><span class="blip"></span>Manahil Jawed</div>
-    <div class="navlinks">
+    <div class="navlinks" id="navlinks">
       <a href="#experience">experience</a>
       <a href="#projects">projects</a>
       <a href="#skills">skills</a>
       <a href="#background">background</a>
       <a href="#contact">contact</a>
     </div>
+    <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
   </div>
 </nav>
 
 <header>
   <canvas id="particles"></canvas>
   <div class="wrap hero-content">
-    <div class="eyebrow">Karachi, Pakistan · Backend & Distributed Systems</div>
+    <div class="eyebrow"></div>
     <h1><span class="l1">Manahil Jawed</span><span class="l2">builds systems that stay correct.</span></h1>
-    <div class="role">// Senior Software Engineer <span class="hi">@</span> Bank Al Habib, Java · Spring Boot · Quarkus · Kafka</div>
+    <div class="role">// Senior Software Engineer <span class="hi">@</span> Bank Al Habib · Microservices &amp; Distributed Systems · <span class="hi">FAST</span> '23<br>Java · Spring · Kafka · RabbitMQ · Vue.js · React</div>
     <p class="lede">I design <b>distributed backend systems</b> for high-availability financial environments: transaction processing, event-driven microservices, and <b>finite-state authorization</b> where every transition has to be deterministic and auditable.</p>
     <div class="cta-row">
       <a class="btn btn-go" href="#projects">View work →</a>
@@ -344,9 +370,9 @@
         <div class="job-loc">Karachi, Pakistan</div>
         <ul>
           <li>Designed and built <b>distributed backend systems</b> with Java, Spring Boot microservices, Quarkus and IBM DB2 in a high-availability financial environment.</li>
-          <li>Engineered transaction-processing modules for document-based financial workflows, compliance monitoring, and high-volume <b>End-of-Day batch processing</b>.</li>
+          <li>Engineered transaction-processing modules for document-based financial workflows, compliance monitoring, and high-volume <b>end-of-day batch processing</b>.</li>
           <li>Modeled complex business logic with strong emphasis on <b>transactional integrity, auditability, and state consistency</b> across services.</li>
-          <li>Built <b>Finite State Machine (FSM)</b> workflow modeling with XState for deterministic state transitions in complex authorization processes.</li>
+          <li>Built <b>finite state machine</b> workflow modeling with XState for deterministic state transitions in complex authorization processes.</li>
           <li>Worked across an <b>event-driven microservices</b> architecture, async messaging with Kafka and RabbitMQ, containerized with Docker, orchestrated on Kubernetes.</li>
           <li>Designed RESTful APIs with structured error handling and clean data contracts; established CI/CD pipelines in GitLab.</li>
         </ul>
@@ -382,7 +408,7 @@
       <div class="card reveal"><span class="card-glow"></span>
         <div class="card-id"><span>PROJ_01</span><span class="k">// fintech</span></div>
         <h3>Distributed Financial Processing & Authorization System</h3>
-        <p>Event-driven microservices backend (Spring Boot + Quarkus, Kafka/RabbitMQ) for high-volume transaction processing and EoD/EoM batch operations, with FSM-driven multi-step authorization.</p>
+        <p>Event-driven microservices backend (Spring Boot + Quarkus, Kafka/RabbitMQ) for high-volume transaction processing and end-of-day / end-of-month batch operations, with finite-state-machine-driven multi-step authorization.</p>
         <div class="chips"><span class="chip hot">Spring Boot</span><span class="chip hot">Quarkus</span><span class="chip hot">Kafka</span><span class="chip">RabbitMQ</span><span class="chip">Docker</span><span class="chip">Kubernetes</span><span class="chip">XState</span><span class="chip">IBM DB2</span><span class="chip">Keycloak</span></div>
       </div>
       <div class="card reveal"><span class="card-glow"></span>
@@ -393,8 +419,8 @@
       </div>
       <div class="card reveal"><span class="card-glow"></span>
         <div class="card-id"><span>PROJ_03</span><span class="k">// fintech · workflow</span></div>
-        <h3>Maker / Checker Authorization Engine</h3>
-        <p>Banking-style authorization workflow modeling Maker, Checker and Approver roles as explicit FSM states, enforcing deterministic transitions, approval/rejection paths, and a full audit trail over a JWT-secured API.</p>
+        <h3>Multi-Level Approval Workflow Engine</h3>
+        <p>Approval system where a request moves through submitter, reviewer and approver stages, each modeled as an explicit finite-state-machine state. Enforces valid-only transitions, approval and rejection paths, and a complete audit trail over a secure token-authenticated API.</p>
         <div class="chips"><span class="chip hot">Spring Boot</span><span class="chip hot">XState</span><span class="chip">PostgreSQL</span><span class="chip">JWT</span><span class="chip">State Machines</span></div>
       </div>
       <div class="card reveal"><span class="card-glow"></span>
@@ -424,7 +450,7 @@
       <div class="card reveal"><span class="card-glow"></span>
         <div class="card-id"><span>PROJ_08</span><span class="k">// research · optimization</span></div>
         <h3>Muhaffiz: Emergency Medical Dispatch &amp; Optimization</h3>
-        <p>Research-driven dispatch system optimizing ambulance allocation and hospital routing, with a location-aware ranking module and ALS/BLS workflow modeling under real-world constraints.</p>
+        <p>Research-driven dispatch system optimizing ambulance allocation and hospital routing, with a location-aware ranking module and advanced / basic life support (ALS/BLS) workflow modeling under real-world constraints.</p>
         <div class="chips"><span class="chip hot">Optimization</span><span class="chip">Geospatial</span><span class="chip">REST</span><span class="chip">Simulation</span><span class="chip">Workflow Modeling</span></div>
       </div>
     </div>
@@ -437,7 +463,7 @@
     <div class="skill-grid">
       <div class="skill-col reveal"><h4>Backend & Languages</h4><div class="list"><span class="s">Java</span><span class="s">Spring Boot</span><span class="s">Spring</span><span class="s">Hibernate</span><span class="s">JPA / JDBC</span><span class="s">JAX-RS</span><span class="s">Quarkus</span><span class="s">Micronaut</span><span class="s">C# / .NET</span><span class="s">ASP.NET MVC</span><span class="s">Node.js</span><span class="s">Maven</span><span class="s">Gradle</span></div></div>
       <div class="skill-col reveal"><h4>Microservices & Infra</h4><div class="list"><span class="s">Microservices</span><span class="s">Docker</span><span class="s">Kubernetes</span><span class="s">Kafka</span><span class="s">RabbitMQ</span><span class="s">Redis</span><span class="s">Event-Driven Arch</span><span class="s">Spring Cloud Gateway</span><span class="s">Eureka</span><span class="s">CI/CD · GitLab</span><span class="s">GitHub Actions</span><span class="s">Prometheus / Grafana</span><span class="s">Keycloak</span><span class="s">JWT</span><span class="s">REST APIs</span></div></div>
-      <div class="skill-col reveal"><h4>Frontend & State</h4><div class="list"><span class="s">React.js</span><span class="s">Next.js</span><span class="s">Vue.js</span><span class="s">XState (FSM)</span><span class="s">React Native</span><span class="s">Flutter / Dart</span><span class="s">JavaScript</span><span class="s">JSON</span></div></div>
+      <div class="skill-col reveal"><h4>Frontend & State</h4><div class="list"><span class="s">React.js</span><span class="s">Next.js</span><span class="s">Vue.js</span><span class="s">XState (Finite State Machines)</span><span class="s">React Native</span><span class="s">Flutter / Dart</span><span class="s">JavaScript</span><span class="s">JSON</span></div></div>
       <div class="skill-col reveal"><h4>Data & Tooling</h4><div class="list"><span class="s">IBM DB2</span><span class="s">PostgreSQL</span><span class="s">MySQL</span><span class="s">MariaDB</span><span class="s">MongoDB</span><span class="s">Git / GitHub</span><span class="s">Postman</span><span class="s">Agile / Scrum</span><span class="s">OOP</span></div></div>
     </div>
   </div>
@@ -513,7 +539,7 @@
       'achieving transactional integrity…',
       'resolving merge conflicts with destiny…',
       'pinging Karachi datacenter…',
-      'warming up the FSM…',
+      'warming up the state machine…',
       'almost deterministic…'
     ];
     let li=0;
@@ -553,6 +579,39 @@
   // nav scroll state
   const nav=document.getElementById('nav');
   addEventListener('scroll',()=>{nav.classList.toggle('scrolled',scrollY>30)});
+
+  // mobile menu toggle
+  (function(){
+    const toggle=document.getElementById('navToggle');
+    const links=document.getElementById('navlinks');
+    if(!toggle||!links) return;
+    const close=()=>{links.classList.remove('show');toggle.classList.remove('open');toggle.setAttribute('aria-expanded','false');};
+    toggle.addEventListener('click',()=>{
+      const open=links.classList.toggle('show');
+      toggle.classList.toggle('open',open);
+      toggle.setAttribute('aria-expanded',open?'true':'false');
+    });
+    links.querySelectorAll('a').forEach(a=>a.addEventListener('click',close));
+  })();
+
+  // scroll-spy: highlight the nav link for the section currently in view
+  (function(){
+    const links=[...document.querySelectorAll('.navlinks a')];
+    if(!links.length) return;
+    const map=new Map();
+    links.forEach(a=>{const id=a.getAttribute('href').slice(1);const sec=document.getElementById(id);if(sec)map.set(sec,a);});
+    if(!map.size) return;
+    const spy=new IntersectionObserver((entries)=>{
+      entries.forEach(e=>{
+        if(e.isIntersecting){
+          links.forEach(l=>l.classList.remove('active'));
+          const a=map.get(e.target);
+          if(a)a.classList.add('active');
+        }
+      });
+    },{rootMargin:'-45% 0px -50% 0px',threshold:0});
+    map.forEach((a,sec)=>spy.observe(sec));
+  })();
 
   // scroll reveal
   const io=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}})},{threshold:.12});
